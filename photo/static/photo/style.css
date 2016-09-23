@@ -1,0 +1,92 @@
+/*Styling for the background image*/
+body
+{
+    background: white url("images/background.jpg")
+}
+
+/*Set the Font for the logo*/
+.navbar-brand
+{
+    font-family: 'Great+Vibes',cursive
+}
+
+.thumbnail
+{
+    justify-content: center
+}
+
+.col-md-4
+{
+    width: 80%;
+    left: 13%
+}
+.col-sm-6 col-md-4
+{
+    float: left;
+    left: 13%
+}
+
+.col-md-8
+{
+      float: left;
+       left: 25%
+}
+
+.col-md-6
+{
+      float:right;
+      right:20%;
+
+}
+
+.col-md-7
+{
+      float:right;
+      right:20%;
+
+}
+
+
+/*Styling for the Pagination Control*/
+ul.pagination-sm {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination-sm li
+{
+    display: inline;
+}
+
+ul.pagination-sm li a
+{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+ul.pagination-sm li.active-class  a {
+    background-color: #4CAF50;
+    color: black;
+    border: 1px solid #4CAF50;
+}
+
+ul.pagination-sm li a:hover:not(.active-class)
+{
+    background-color: #ddd;
+}
+
+.pagination {
+    display: table;
+    margin: 0 auto;
+}
+
+.active-class
+{
+    font-color: yellow;
+    font-weight: bold;
+}

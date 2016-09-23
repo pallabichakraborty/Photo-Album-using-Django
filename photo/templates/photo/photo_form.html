@@ -1,0 +1,47 @@
+<!--Code Reference : https://github.com/buckyroberts/Viberr-->
+
+<!--Load the base HTML -->
+{% extends 'photo/base.html' %}
+<!--Page Title -->
+{% block title %}Upload a New Photo{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <!-- Add Error Message if there are Errors -->
+                        <h3>Upload a Photo</h3>
+                        {% if error_message %}
+                            <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <!--Include the Form Template to generate the Photo Form Template using the Fields in forms.py-->
+                            {% include 'photo/form-template.html'%}
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- Get the authentication status of the user -->
+user_authenticated={{user_authenticated}}
+<!-- Block to decide whether the user is required to login or logout -->
+{% block login %}
+    <!--If the user is unauthenticated then output Login -->
+    {% if user_authenticated == False %}
+       Login
+    <!--If the user is authenticated then output Logout -->
+    {% else %}
+       Logout
+    {% endif %}
+{% endblock %}

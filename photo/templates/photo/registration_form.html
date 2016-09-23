@@ -1,0 +1,42 @@
+<!--Code Reference : https://github.com/buckyroberts/Viberr-->
+
+<!--Load the base HTML -->
+{% extends 'photo/base_unauthorized.html' %}
+
+<!--Registration Page -->
+{% block title %}Register{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <!--Label For Panel -->
+                        <h3>Create a new Account</h3>
+                        <!-- Error Message Output if any -->
+                        {% if error_message %}
+                            <p><strong>{{ error_message }}</strong></p>
+                        {% endif %}
+                        <!-- Use form template to generate the form -->
+                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% include 'photo/form-template.html'%}
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--Link to login if Login already available -->
+                    <div class="panel-footer">
+                    Already have an account? <a href="{% url 'photo:login' %}">Click here</a> to log in.
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

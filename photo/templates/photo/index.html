@@ -1,0 +1,54 @@
+<!--Code Reference : https://github.com/buckyroberts/Viberr-->
+<!--This is the default photo Page which is visible to both authenticated and unauthenticated users with the list of all the photos which have be uploaded to the site -->
+
+<!-- Load the base HTML -->
+{% extends 'photo/base.html' %}
+
+<body>
+{% block body %}
+    <!--Proceed only if there are photos to list else output a message that there are no photos available to be shown -->
+    {% if all_photo %}
+        <div class="row">
+            <!-- As the photos need to be shown in the order from newest to oldest, thus reversing the list to be able to show primary keys in descending order -->
+            {% for photo in all_photo reversed%}
+                 <div class="thumbnailrows">
+                      <div class="col-sm-6 col-md-4" align="center">
+                        <div class="thumbnail">
+                          <!--Output the uplaoded Photo -->
+                          <img src="{{photo.photo_file.url}}" class="img-rounded m-x-auto d-block" alt="{{photo.photo_title}}">
+                          <div class="caption">
+                              <!-- Output the photo Title -->
+                              <h3>{{photo.photo_title}}</h3>
+                              <!-- Output the Photo Caption -->
+                              <h4><i>{{photo.photo_caption}}</i></h4>
+                              <!-- Output the user who has uploaded the Photo -->
+                              <h6><i>Uploaded By: {{photo.user_id}}</i></h6>
+                          </div>
+                        </div>
+                      </div>
+                 </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>You do not have any photos</h2>
+    {% endif %}
+
+    <!--div to contain the pagination controls -->
+    <div class="pagination"></div>
+
+{% endblock %}
+
+<!-- Get the authentication status of the user -->
+user_authenticated={{user_authenticated}}
+<!-- Block to decide whether the user is required to login or logout -->
+{% block login %}
+    <!--If the user is unauthenticated then output Login -->
+    {% if user_authenticated == False %}
+       Login
+    <!--If the user is authenticated then output Logout -->
+    {% else %}
+       Logout
+    {% endif %}
+{% endblock %}
+
+</body>

@@ -1,0 +1,15 @@
+<!--Code Reference : https://github.com/buckyroberts/Viberr-->
+
+<!-- Fields Skeleton for a form to be generated using the models, this makes a template for Error field along with a label and input field-->
+{% for field in form %}
+    <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+             <!--Errors to be output in Red -->
+             <span class="text-danger small">{{ fields.errors }}</span>
+         </div>
+        <label class="control-label col-sm-2">{{ field.label_tag }}</label>
+        <div class="col-sm-10">
+            {{ field }}
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,53 @@
+<!--Code Reference : https://github.com/buckyroberts/Viberr-->
+<!-- This Page is to be used to view all the details of a photo, this page is accessible only to authenticated users -->
+<!-- This can be accessed only for the user's own uploaded photos -->
+
+<!--Loads the base HTML page -->
+{% extends 'photo/base.html' %}
+
+<!--Customized Page Title -->
+{% block title %}Photo Details{% endblock %}
+
+{% block body %}
+<div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <!--Output the Photo Title-->
+        <h2><center>{{photo.photo_title}}</center></h2>
+        <!--Output the Photo Caption along with a link to edit the Photo Caption-->
+        <h3>
+            <center>{{photo.photo_caption}}
+                <a href="{% url 'photo:photo-update' photo.id%}"><font size="2">Edit Caption</font></a>
+            </center>
+        </h3>
+        <!--Output the Photo -->
+        <div class="col-md-4">
+            <div class="photo">
+                <center><img src="{{photo.photo_file.url}}" /></center>
+            </div>
+        </div>
+        <div class="col-md-8">
+                <table style="width:100%" class="photodetails">
+                    <tr>
+                        <!--Output the upload time-->
+                        <td><b>Upload time :</b><i> {{photo.photo_uploadtime}}</i></td>
+                        <!--Output the User ID who uploaded the photo-->
+                        <td><b>Uploaded By :</b><i> {{photo.user_id}}</i></td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Get the authentication status of the user -->
+user_authenticated={{user_authenticated}}
+<!-- Block to decide whether the user is required to login or logout -->
+{% block login %}
+    <!--If the user is unauthenticated then output Login -->
+    {% if user_authenticated == False %}
+       Login
+    <!--If the user is authenticated then output Logout -->
+    {% else %}
+       Logout
+    {% endif %}
+{% endblock %}

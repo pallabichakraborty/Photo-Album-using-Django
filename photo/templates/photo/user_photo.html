@@ -1,0 +1,66 @@
+<!--Code Reference : https://github.com/buckyroberts/Viberr-->
+
+<!--Load the base HTML -->
+{% extends 'photo/base.html' %}
+<body>
+{% block body %}
+    <!--If there are user uploaded photos -->
+    {% if photos %}
+        <div class="row">
+             <!-- As the photos need to be shown in the order from newest to oldest, thus reversing the list to be able to show primary keys in descending order -->
+            {% for photo in photos reversed%}
+                 <div class="thumbnailrows">
+                      <div class="col-sm-6 col-md-4" align="center">
+                        <div class="thumbnail">
+                            <!--Output the uplaoded Photo -->
+                            <img src="{{photo.photo_file.url}}" class="img-rounded m-x-auto d-block" alt="{{photo.photo_title}}">
+                            <div class="caption">
+                                <!-- Output the photo Title -->
+                                <h3>{{photo.photo_title}}</h3>
+                                <!-- Output the Photo Caption -->
+                                <p>{{photo.photo_caption}}</p>
+                                <p>
+                                    <!--Button to be able to see the details of the photo -->
+                                    <a href="/photo/{{photo.id}}" class="btn btn-default" role="button">View Details</a>
+                                    <!-- Button to delete the photo-->
+                                    <form action="{% url 'photo:photo-delete' photo.id%}" method="post" style="display:inline">
+                                        {% csrf_token %}
+                                       <input type="hidden" name="photo_id" value="{{ photo.id }}"/>
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                        </button>
+                                    </form>
+                                </p>
+                            </div>
+                        </div>
+                      </div>
+                 </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2>You dont have any photos</h2>
+    {% endif %}
+
+<div class="pagination"></div>
+
+
+{% endblock %}
+
+
+
+<!-- Get the authentication status of the user -->
+user_authenticated={{user_authenticated}}
+<!-- Block to decide whether the user is required to login or logout -->
+{% block login %}
+    <!--If the user is unauthenticated then output Login -->
+    {% if user_authenticated == False %}
+       Login
+    <!--If the user is authenticated then output Logout -->
+    {% else %}
+       Logout
+    {% endif %}
+{% endblock %}
+
+
+
+</body>
